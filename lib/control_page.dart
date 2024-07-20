@@ -6,6 +6,12 @@ import 'package:winui_n2n/edge_state.dart';
 import 'package:winui_n2n/saved_connection.dart';
 import 'package:winui_n2n/shared_pref_singleton.dart';
 
+TextEditingController _supernodeController = TextEditingController();
+TextEditingController _communityController = TextEditingController();
+TextEditingController _keyController = TextEditingController();
+TextEditingController _selfAddressController = TextEditingController();
+TextEditingController _configNameController = TextEditingController();
+
 class ControlPage extends StatefulWidget {
   const ControlPage({super.key});
 
@@ -14,32 +20,15 @@ class ControlPage extends StatefulWidget {
 }
 
 class _ControlPageState extends State<ControlPage> {
-  late TextEditingController _supernodeController;
-  late TextEditingController _communityController;
-  late TextEditingController _keyController;
-  late TextEditingController _selfAddressController;
-  late TextEditingController _configNameController;
-
   bool _edgeConnecting = false;
 
   @override
   void initState() {
     super.initState();
-    _supernodeController = TextEditingController();
-    _communityController = TextEditingController();
-    _keyController = TextEditingController();
-    _selfAddressController = TextEditingController();
-    _configNameController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _supernodeController.dispose();
-    _communityController.dispose();
-    _keyController.dispose();
-    _selfAddressController.dispose();
-    _configNameController.dispose();
-
     super.dispose();
   }
 
