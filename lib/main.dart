@@ -5,6 +5,7 @@ import 'package:window_manager/window_manager.dart';
 import 'package:winui_n2n/application_exit_control.dart';
 import 'package:winui_n2n/edge_state.dart';
 import 'package:winui_n2n/shared_pref_singleton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +51,8 @@ class _MainAppState extends State<MainApp> {
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
       themeMode: _themeMode,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: const Scaffold(
         body: ApplicationExitControl(),
       ),
