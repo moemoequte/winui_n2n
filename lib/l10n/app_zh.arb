@@ -1,3 +1,19 @@
 {
-    "helloWorld": "你好世界!"
+    "mainPage": "主页",
+    "aboutPage": "关于",
+    "logPage": "日志",
+    "settingsPage": "设置",
+    "n2nSuperNode": "主服务器",
+    "n2nCommunity": "网络社区",
+    "n2nCommunityKey": "社区密码",
+    "n2nSelfAddress": "我的地址",
+    "saveConfig": "保存配置",
+    "connect": "开始连接",
+    "useConfig": "使用配置",
+    "autoFirewall": "自动设置防火墙",
+    "checkUpdate": "检查更新",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "notImplement": "功能尚未开发, 敬请期待~"
 }
