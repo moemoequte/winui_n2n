@@ -17,5 +17,6 @@
     "delete": "Delete",
     "notImplement": "Work in progress",
     "disconnect": "Disconnect",
-    "use": "Use It"
+    "use": "Use It",
+    "configNameComment": "Write a name for this config"
 }

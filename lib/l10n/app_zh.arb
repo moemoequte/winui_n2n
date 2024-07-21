@@ -17,5 +17,6 @@
     "delete": "删除",
     "notImplement": "功能尚未开发, 敬请期待~",
     "disconnect": "断开连接",
-    "use": "使用"
+    "use": "使用",
+    "configNameComment": "给这个配置备注一个名字"
 }
