@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:winui_n2n/main.dart';
 import 'package:winui_n2n/shared_pref_singleton.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -29,6 +30,23 @@ class _SettingPageState extends State<SettingPage> {
               },
             ),
           ],
+        ),
+        DropdownButton<Locale>(
+          value: Localizations.localeOf(context),
+          items:
+              AppLocalizations.supportedLocales.map<DropdownMenuItem<Locale>>(
+            (e) {
+              return DropdownMenuItem(
+                value: e,
+                child: Text(e.toString()),
+              );
+            },
+          ).toList(),
+          onChanged: (value) {
+            setState(() {
+              MainApp.of(context).changeLocale(value!);
+            });
+          },
         ),
         ElevatedButton(
           onPressed: () {

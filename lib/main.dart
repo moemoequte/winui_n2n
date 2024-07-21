@@ -45,18 +45,27 @@ class _MainAppState extends State<MainApp> {
       SharedPrefSingleton().appTheme ? ThemeMode.light : ThemeMode.dark;
   ThemeMode get getCurrentTheme => _themeMode;
 
+  Locale? _locale;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(),
       darkTheme: ThemeData.dark(),
       themeMode: _themeMode,
+      locale: _locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const Scaffold(
         body: ApplicationExitControl(),
       ),
     );
+  }
+
+  void changeLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
   }
 
   void changeTheme(ThemeMode mode) {
