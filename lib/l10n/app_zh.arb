@@ -16,5 +16,6 @@
     "cancel": "取消",
     "delete": "删除",
     "notImplement": "功能尚未开发, 敬请期待~",
-    "disconnect": "断开连接"
+    "disconnect": "断开连接",
+    "use": "使用"
 }
