@@ -4,6 +4,7 @@ import 'package:winui_n2n/about_page.dart';
 import 'package:winui_n2n/logger_page.dart';
 import 'package:winui_n2n/main.dart';
 import 'package:winui_n2n/setting_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -62,26 +63,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            destinations: const <NavigationRailDestination>[
+            destinations: <NavigationRailDestination>[
               NavigationRailDestination(
-                icon: Icon(Icons.favorite_border),
-                selectedIcon: Icon(Icons.favorite),
-                label: Text('主页'),
+                icon: const Icon(Icons.favorite_border),
+                selectedIcon: const Icon(Icons.favorite),
+                label: Text(AppLocalizations.of(context)!.mainPage),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.bookmark_border),
-                selectedIcon: Icon(Icons.book),
-                label: Text('关于'),
+                icon: const Icon(Icons.bookmark_border),
+                selectedIcon: const Icon(Icons.book),
+                label: Text(AppLocalizations.of(context)!.aboutPage),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.pause_circle_filled),
-                selectedIcon: Icon(Icons.pause_circle),
-                label: Text('日志'),
+                icon: const Icon(Icons.pause_circle_filled),
+                selectedIcon: const Icon(Icons.pause_circle),
+                label: Text(AppLocalizations.of(context)!.logPage),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.star_border),
-                selectedIcon: Icon(Icons.star),
-                label: Text('设置'),
+                icon: const Icon(Icons.star_border),
+                selectedIcon: const Icon(Icons.star),
+                label: Text(AppLocalizations.of(context)!.settingsPage),
               ),
             ],
           ),
