@@ -147,7 +147,7 @@ class _ControlPageState extends State<ControlPage> {
                                     Navigator.pop(context);
                                     return;
                                   },
-                                  child: const Text("保存")),
+                                  child: const Text('保存')),
                               TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -172,13 +172,13 @@ class _ControlPageState extends State<ControlPage> {
                           // Turn on firewall
                           if (SharedPrefSingleton().autoFirewall) {
                             await Process.run(
-                              "netsh.exe",
+                              'netsh.exe',
                               [
-                                "advfirewall",
-                                "set",
-                                "allprofiles",
-                                "state",
-                                "on",
+                                'advfirewall',
+                                'set',
+                                'allprofiles',
+                                'state',
+                                'on',
                               ],
                             );
                           }
@@ -199,53 +199,53 @@ class _ControlPageState extends State<ControlPage> {
 
                           // Check for tap device
                           final findTapResult = await Process.run(
-                            "./tools/driver/devcon.exe",
-                            ["hwids", "tap0901"],
+                            './tools/driver/devcon.exe',
+                            ['hwids', 'tap0901'],
                           );
                           if (findTapResult.stdout
                               .toString()
                               .contains('No matching devices found.')) {
                             // Install tap device
                             EdgeState.instance.logger
-                                .addLog("Tap device not found, installing tap");
-                            debugPrint("Tap device not found, installing tap");
+                                .addLog('Tap device not found, installing tap');
+                            debugPrint('Tap device not found, installing tap');
                             final installTapResult = await Process.run(
-                              "./tools/driver/devcon.exe",
+                              './tools/driver/devcon.exe',
                               [
-                                "install",
-                                "./tools/driver/OemVista.inf",
-                                "tap0901",
+                                'install',
+                                './tools/driver/OemVista.inf',
+                                'tap0901',
                               ],
                             );
                             if (installTapResult.stdout.toString().contains(
-                                    "Tap driver installed successfully.") ||
+                                    'Tap driver installed successfully.') ||
                                 installTapResult.stdout.toString().contains(
-                                    "Drivers installed successfully.")) {
+                                    'Drivers installed successfully.')) {
                               EdgeState.instance.logger
-                                  .addLog("Tap driver installed successfully.");
-                              debugPrint("Tap driver installed successfully.");
+                                  .addLog('Tap driver installed successfully.');
+                              debugPrint('Tap driver installed successfully.');
                             } else {
                               EdgeState.instance.logger
-                                  .addLog("Tap driver install failed.");
-                              debugPrint("Tap driver install failed.");
+                                  .addLog('Tap driver install failed.');
+                              debugPrint('Tap driver install failed.');
                             }
                           } else {
                             // Ignore.
                             EdgeState.instance.logger
-                                .addLog("Tap device already installed");
-                            debugPrint("Tap device already installed");
+                                .addLog('Tap device already installed');
+                            debugPrint('Tap device already installed');
                           }
 
                           // Close firewall
                           if (SharedPrefSingleton().autoFirewall) {
                             await Process.run(
-                              "netsh.exe",
+                              'netsh.exe',
                               [
-                                "advfirewall",
-                                "set",
-                                "allprofiles",
-                                "state",
-                                "off",
+                                'advfirewall',
+                                'set',
+                                'allprofiles',
+                                'state',
+                                'off',
                               ],
                             );
                           }
@@ -253,24 +253,24 @@ class _ControlPageState extends State<ControlPage> {
                           // Start the edge
                           // edge -c <community> -k <communityKey> -a <selfAddress> -r  -l <remoteSuperNodeAddress>
                           Process.start(
-                            "./tools/edge/edge.exe",
+                            './tools/edge/edge.exe',
                             [
-                              "-l",
+                              '-l',
                               _supernodeController.text,
-                              "-c",
+                              '-c',
                               _communityController.text,
-                              "-k",
+                              '-k',
                               _keyController.text,
-                              "-a",
+                              '-a',
                               _selfAddressController.text,
-                              "-r",
+                              '-r',
                             ],
                           ).then((process) async {
                             EdgeState.instance.isRunning = true;
                             EdgeState.instance.process = process;
                             EdgeState.instance.logger
-                                .addLog("edge.exe starting");
-                            debugPrint("edge.exe starting");
+                                .addLog('edge.exe starting');
+                            debugPrint('edge.exe starting');
                             setState(() {
                               _edgeConnecting = false;
                             });
@@ -285,16 +285,16 @@ class _ControlPageState extends State<ControlPage> {
                             EdgeState.instance.isRunning = false;
                             EdgeState.instance.process = null;
                             EdgeState.instance.logger
-                                .addLog("edge.exe closing");
-                            debugPrint("edge.exe closing");
+                                .addLog('edge.exe closing');
+                            debugPrint('edge.exe closing');
                             if (!mounted) return;
                             setState(() {});
                           });
                         }
                       },
                 child: EdgeState.instance.isRunning
-                    ? const Text("断开连接")
-                    : const Text("开始连接"),
+                    ? const Text('断开连接')
+                    : const Text('开始连接'),
               ),
               TextButton(
                   onPressed: () {
@@ -411,7 +411,7 @@ class _ControlPageState extends State<ControlPage> {
                                       Navigator.pop(context);
                                       return;
                                     },
-                                    child: const Text("取消"),
+                                    child: const Text('取消'),
                                   ),
                                 ],
                               ),
@@ -421,7 +421,7 @@ class _ControlPageState extends State<ControlPage> {
                       ),
                     );
                   },
-                  child: const Text("使用配置")),
+                  child: const Text('使用配置')),
             ],
           ),
         ),

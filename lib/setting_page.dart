@@ -35,12 +35,12 @@ class _SettingPageState extends State<SettingPage> {
               ..removeCurrentSnackBar()
               ..showSnackBar(
                 const SnackBar(
-                  content: Text("功能暂未开发, 敬请期待~"),
+                  content: Text('功能暂未开发, 敬请期待~'),
                   duration: Duration(seconds: 2),
                 ),
               );
           },
-          child: const Text("检查更新"),
+          child: const Text('检查更新'),
         ),
       ],
     );
