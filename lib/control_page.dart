@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:winui_n2n/edge_state.dart';
 import 'package:winui_n2n/saved_connection.dart';
 import 'package:winui_n2n/shared_pref_singleton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 TextEditingController _supernodeController = TextEditingController();
 TextEditingController _communityController = TextEditingController();
@@ -43,9 +44,9 @@ class _ControlPageState extends State<ControlPage> {
             width: 300,
             child: TextField(
               controller: _supernodeController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: '主服务器',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: AppLocalizations.of(context)!.n2nSuperNode,
               ),
             ),
           ),
@@ -56,9 +57,9 @@ class _ControlPageState extends State<ControlPage> {
             width: 300,
             child: TextField(
               controller: _communityController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: '网络社区',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: AppLocalizations.of(context)!.n2nCommunity,
               ),
             ),
           ),
@@ -70,9 +71,9 @@ class _ControlPageState extends State<ControlPage> {
             child: TextField(
               controller: _keyController,
               obscureText: true,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: '社区密码',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: AppLocalizations.of(context)!.n2nCommunityKey,
               ),
             ),
           ),
@@ -83,9 +84,9 @@ class _ControlPageState extends State<ControlPage> {
             width: 300,
             child: TextField(
               controller: _selfAddressController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: '我的地址',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: AppLocalizations.of(context)!.n2nSelfAddress,
               ),
             ),
           ),
@@ -109,9 +110,10 @@ class _ControlPageState extends State<ControlPage> {
                             width: 350,
                             child: TextField(
                               controller: _configNameController,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: '给这个配置备注一个名字',
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: AppLocalizations.of(context)!
+                                    .configNameComment,
                               ),
                             ),
                           ),
@@ -147,13 +149,15 @@ class _ControlPageState extends State<ControlPage> {
                                     Navigator.pop(context);
                                     return;
                                   },
-                                  child: const Text('保存')),
+                                  child:
+                                      Text(AppLocalizations.of(context)!.save)),
                               TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
                                   return;
                                 },
-                                child: const Text('取消'),
+                                child:
+                                    Text(AppLocalizations.of(context)!.cancel),
                               ),
                             ],
                           ),
@@ -162,7 +166,7 @@ class _ControlPageState extends State<ControlPage> {
                     ),
                   ),
                 ),
-                child: const Text('保存配置'),
+                child: Text(AppLocalizations.of(context)!.saveConfig),
               ),
               ElevatedButton(
                 onPressed: _edgeConnecting
@@ -293,8 +297,8 @@ class _ControlPageState extends State<ControlPage> {
                         }
                       },
                 child: EdgeState.instance.isRunning
-                    ? const Text('断开连接')
-                    : const Text('开始连接'),
+                    ? Text(AppLocalizations.of(context)!.disconnect)
+                    : Text(AppLocalizations.of(context)!.connect),
               ),
               TextButton(
                   onPressed: () {
@@ -365,7 +369,8 @@ class _ControlPageState extends State<ControlPage> {
                                       Navigator.pop(context);
                                       return;
                                     },
-                                    child: const Text('使用'),
+                                    child:
+                                        Text(AppLocalizations.of(context)!.use),
                                   ),
                                   TextButton(
                                     onPressed: () {
@@ -404,14 +409,16 @@ class _ControlPageState extends State<ControlPage> {
                                         return;
                                       });
                                     },
-                                    child: const Text('删除'),
+                                    child: Text(
+                                        AppLocalizations.of(context)!.delete),
                                   ),
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                       return;
                                     },
-                                    child: const Text('取消'),
+                                    child: Text(
+                                        AppLocalizations.of(context)!.cancel),
                                   ),
                                 ],
                               ),
@@ -421,7 +428,7 @@ class _ControlPageState extends State<ControlPage> {
                       ),
                     );
                   },
-                  child: const Text('使用配置')),
+                  child: Text(AppLocalizations.of(context)!.useConfig)),
             ],
           ),
         ),

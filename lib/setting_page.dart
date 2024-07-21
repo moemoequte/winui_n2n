@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:winui_n2n/shared_pref_singleton.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -17,7 +18,7 @@ class _SettingPageState extends State<SettingPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('自动设置防火墙'),
+            Text(AppLocalizations.of(context)!.autoFirewall),
             Switch(
               value: SharedPrefSingleton().autoFirewall,
               onChanged: (value) {
@@ -34,13 +35,13 @@ class _SettingPageState extends State<SettingPage> {
             ScaffoldMessenger.of(context)
               ..removeCurrentSnackBar()
               ..showSnackBar(
-                const SnackBar(
-                  content: Text('功能暂未开发, 敬请期待~'),
-                  duration: Duration(seconds: 2),
+                SnackBar(
+                  content: Text(AppLocalizations.of(context)!.notImplement),
+                  duration: const Duration(seconds: 2),
                 ),
               );
           },
-          child: const Text('检查更新'),
+          child: Text(AppLocalizations.of(context)!.checkUpdate),
         ),
       ],
     );
