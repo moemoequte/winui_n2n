@@ -15,5 +15,6 @@
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
-    "notImplement": "Work in progress"
+    "notImplement": "Work in progress",
+    "disconnect": "Disconnect"
 }
