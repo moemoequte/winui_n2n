@@ -1,3 +1,19 @@
 {
-    "helloWorld": "Hello World!"
+    "mainPage": "Main",
+    "aboutPage": "About",
+    "logPage": "Log",
+    "settingsPage": "Settings",
+    "n2nSuperNode": "Super Node",
+    "n2nCommunity": "Community",
+    "n2nCommunityKey": "Community Key",
+    "n2nSelfAddress": "Self Address",
+    "saveConfig": "Save Config",
+    "connect": "Connect",
+    "useConfig": "Use Config",
+    "autoFirewall": "Automatically configure Windows firewall",
+    "checkUpdate": "Check Update",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "notImplement": "Work in progress"
 }
