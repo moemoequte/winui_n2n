@@ -41,18 +41,18 @@ class _ApplicationExitControlState extends State<ApplicationExitControl> {
 
     // Uninstall tap device before exit
     final findTapResult = await Process.run(
-      "./tools/driver/devcon.exe",
-      ["hwids", "tap0901"],
+      './tools/driver/devcon.exe',
+      ['hwids', 'tap0901'],
     );
     if (!findTapResult.stdout
         .toString()
         .contains('No matching devices found.')) {
       // Unstall tap device
       await Process.run(
-        "./tools/driver/devcon.exe",
+        './tools/driver/devcon.exe',
         [
-          "remove",
-          "tap0901",
+          'remove',
+          'tap0901',
         ],
       );
     }

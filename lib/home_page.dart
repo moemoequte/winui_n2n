@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     // Must contain a default widget.
-    return const Text("Default");
+    return const Text('Default');
   }
 
   @override
