@@ -11,7 +11,6 @@ TextEditingController _supernodeController = TextEditingController();
 TextEditingController _communityController = TextEditingController();
 TextEditingController _keyController = TextEditingController();
 TextEditingController _selfAddressController = TextEditingController();
-TextEditingController _configNameController = TextEditingController();
 
 class ControlPage extends StatefulWidget {
   const ControlPage({super.key});
@@ -97,75 +96,82 @@ class _ControlPageState extends State<ControlPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                onPressed: () => showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => Dialog(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(
-                            width: 350,
-                            child: TextField(
-                              controller: _configNameController,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                labelText: AppLocalizations.of(context)!
-                                    .configNameComment,
+                onPressed: () {
+                  TextEditingController configNameController =
+                      TextEditingController();
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => Dialog(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                              width: 350,
+                              child: TextField(
+                                controller: configNameController,
+                                decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  labelText: AppLocalizations.of(context)!
+                                      .configNameComment,
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              TextButton(
+                            const SizedBox(height: 15),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      List<dynamic> nodeList = jsonDecode(
+                                          SharedPrefSingleton()
+                                              .savedConnection);
+                                      List<SavedConnection> nodes = nodeList
+                                          .cast<Map<String, dynamic>>()
+                                          .map((nodeData) =>
+                                              SavedConnection.fromJson(
+                                                  nodeData))
+                                          .toList();
+                                      nodes.add(SavedConnection(
+                                        configNameController.text,
+                                        _supernodeController.text,
+                                        _communityController.text,
+                                        _keyController.text,
+                                        _selfAddressController.text,
+                                      ));
+
+                                      List<Map<String, dynamic>> nodeMaps =
+                                          nodes
+                                              .map((node) => node.toJson())
+                                              .toList();
+                                      String jsonString = jsonEncode(nodeMaps);
+                                      SharedPrefSingleton()
+                                          .setSavedConnection(jsonString);
+
+                                      Navigator.pop(context);
+                                      return;
+                                    },
+                                    child: Text(
+                                        AppLocalizations.of(context)!.save)),
+                                TextButton(
                                   onPressed: () {
-                                    List<dynamic> nodeList = jsonDecode(
-                                        SharedPrefSingleton().savedConnection);
-                                    List<SavedConnection> nodes = nodeList
-                                        .cast<Map<String, dynamic>>()
-                                        .map((nodeData) =>
-                                            SavedConnection.fromJson(nodeData))
-                                        .toList();
-                                    nodes.add(SavedConnection(
-                                      _configNameController.text,
-                                      _supernodeController.text,
-                                      _communityController.text,
-                                      _keyController.text,
-                                      _selfAddressController.text,
-                                    ));
-
-                                    List<Map<String, dynamic>> nodeMaps = nodes
-                                        .map((node) => node.toJson())
-                                        .toList();
-                                    String jsonString = jsonEncode(nodeMaps);
-                                    SharedPrefSingleton()
-                                        .setSavedConnection(jsonString);
-
                                     Navigator.pop(context);
                                     return;
                                   },
-                                  child:
-                                      Text(AppLocalizations.of(context)!.save)),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  return;
-                                },
-                                child:
-                                    Text(AppLocalizations.of(context)!.cancel),
-                              ),
-                            ],
-                          ),
-                        ],
+                                  child: Text(
+                                      AppLocalizations.of(context)!.cancel),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },
                 child: Text(AppLocalizations.of(context)!.saveConfig),
               ),
               ElevatedButton(
