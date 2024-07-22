@@ -302,130 +302,139 @@ class _ControlPageState extends State<ControlPage> {
               ),
               TextButton(
                   onPressed: () {
-                    SavedConnection? selectedSavedConnection;
                     showDialog<String>(
                       context: context,
-                      builder: (BuildContext context) => Dialog(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Builder(builder: (context) {
-                                String jsonString =
-                                    SharedPrefSingleton().savedConnection;
-                                List<dynamic> nodeList = jsonDecode(jsonString);
-                                List<SavedConnection> nodes = nodeList
-                                    .cast<Map<String, dynamic>>()
-                                    .map((nodeData) =>
-                                        SavedConnection.fromJson(nodeData))
-                                    .toList();
+                      builder: (BuildContext context) => StatefulBuilder(
+                          builder:
+                              (BuildContext context, StateSetter setState) {
+                        SavedConnection? selectedSavedConnection;
+                        return Dialog(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Builder(builder: (context) {
+                                  String jsonString =
+                                      SharedPrefSingleton().savedConnection;
+                                  List<dynamic> nodeList =
+                                      jsonDecode(jsonString);
+                                  List<SavedConnection> nodes = nodeList
+                                      .cast<Map<String, dynamic>>()
+                                      .map((nodeData) =>
+                                          SavedConnection.fromJson(nodeData))
+                                      .toList();
 
-                                return StatefulBuilder(builder:
-                                    (BuildContext context,
-                                        StateSetter setState) {
-                                  return DropdownButton(
-                                      value: selectedSavedConnection,
-                                      items: nodes.map<
-                                              DropdownMenuItem<
-                                                  SavedConnection>>(
-                                          (SavedConnection value) {
-                                        return DropdownMenuItem<
-                                            SavedConnection>(
-                                          value: value,
-                                          child: Text(value.name),
-                                        );
-                                      }).toList(),
-                                      onChanged: (value) {
-                                        setState(
-                                          () {
-                                            selectedSavedConnection = value!;
+                                  return StatefulBuilder(builder:
+                                      (BuildContext context,
+                                          StateSetter setState) {
+                                    return DropdownButton(
+                                        value: selectedSavedConnection,
+                                        items: nodes.map<
+                                                DropdownMenuItem<
+                                                    SavedConnection>>(
+                                            (SavedConnection value) {
+                                          return DropdownMenuItem<
+                                              SavedConnection>(
+                                            value: value,
+                                            child: Text(value.name),
+                                          );
+                                        }).toList(),
+                                        onChanged: (value) {
+                                          setState(
+                                            () {
+                                              selectedSavedConnection = value!;
+                                            },
+                                          );
+                                        });
+                                  });
+                                }),
+                                const SizedBox(height: 15),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        if (selectedSavedConnection != null) {
+                                          _supernodeController.text =
+                                              selectedSavedConnection!
+                                                  .supernode;
+                                          _communityController.text =
+                                              selectedSavedConnection!
+                                                  .community;
+                                          _keyController.text =
+                                              selectedSavedConnection!
+                                                  .communityKey;
+                                          _selfAddressController.text =
+                                              selectedSavedConnection!
+                                                  .selfAddress;
+                                        }
+
+                                        Navigator.pop(context);
+                                        return;
+                                      },
+                                      child: Text(
+                                          AppLocalizations.of(context)!.use),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        if (selectedSavedConnection == null) {
+                                          Navigator.pop(context);
+                                          return;
+                                        }
+
+                                        String jsonString =
+                                            SharedPrefSingleton()
+                                                .savedConnection;
+                                        List<dynamic> nodeList =
+                                            jsonDecode(jsonString);
+                                        List<SavedConnection> nodes = nodeList
+                                            .cast<Map<String, dynamic>>()
+                                            .map((nodeData) =>
+                                                SavedConnection.fromJson(
+                                                    nodeData))
+                                            .toList();
+
+                                        nodes.removeWhere(
+                                          (element) {
+                                            return element.name ==
+                                                selectedSavedConnection!.name;
                                           },
                                         );
-                                      });
-                                });
-                              }),
-                              const SizedBox(height: 15),
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      if (selectedSavedConnection != null) {
-                                        _supernodeController.text =
-                                            selectedSavedConnection!.supernode;
-                                        _communityController.text =
-                                            selectedSavedConnection!.community;
-                                        _keyController.text =
-                                            selectedSavedConnection!
-                                                .communityKey;
-                                        _selfAddressController.text =
-                                            selectedSavedConnection!
-                                                .selfAddress;
-                                      }
 
-                                      Navigator.pop(context);
-                                      return;
-                                    },
-                                    child:
-                                        Text(AppLocalizations.of(context)!.use),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      if (selectedSavedConnection == null) {
+                                        List<Map<String, dynamic>> nodeMaps =
+                                            nodes
+                                                .map((node) => node.toJson())
+                                                .toList();
+                                        SharedPrefSingleton()
+                                            .setSavedConnection(
+                                                jsonEncode(nodeMaps))
+                                            .then((onValue) {
+                                          setState(() {});
+                                          // Navigator.pop(context);
+                                          return;
+                                        });
+                                      },
+                                      child: Text(
+                                          AppLocalizations.of(context)!.delete),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
                                         Navigator.pop(context);
                                         return;
-                                      }
-
-                                      String jsonString =
-                                          SharedPrefSingleton().savedConnection;
-                                      List<dynamic> nodeList =
-                                          jsonDecode(jsonString);
-                                      List<SavedConnection> nodes = nodeList
-                                          .cast<Map<String, dynamic>>()
-                                          .map((nodeData) =>
-                                              SavedConnection.fromJson(
-                                                  nodeData))
-                                          .toList();
-
-                                      nodes.removeWhere(
-                                        (element) {
-                                          return element.name ==
-                                              selectedSavedConnection!.name;
-                                        },
-                                      );
-
-                                      List<Map<String, dynamic>> nodeMaps =
-                                          nodes
-                                              .map((node) => node.toJson())
-                                              .toList();
-                                      SharedPrefSingleton()
-                                          .setSavedConnection(
-                                              jsonEncode(nodeMaps))
-                                          .then((onValue) {
-                                        Navigator.pop(context);
-                                        return;
-                                      });
-                                    },
-                                    child: Text(
-                                        AppLocalizations.of(context)!.delete),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      return;
-                                    },
-                                    child: Text(
-                                        AppLocalizations.of(context)!.cancel),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                      },
+                                      child: Text(
+                                          AppLocalizations.of(context)!.cancel),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                     );
                   },
                   child: Text(AppLocalizations.of(context)!.useConfig)),
