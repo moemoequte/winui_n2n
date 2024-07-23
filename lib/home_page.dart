@@ -21,19 +21,6 @@ class _HomePageState extends State<HomePage> with TrayListener {
   @override
   void initState() {
     trayManager.addListener(this);
-    trayManager.setIcon(''); // TODO
-    Menu menu = Menu(
-      items: [
-        MenuItem(
-          key: 'show_window',
-          label: 'Show Window',
-          onClick: (menuItem) {
-            windowManager.show();
-          },
-        ),
-      ],
-    );
-    trayManager.setContextMenu(menu);
     super.initState();
   }
 
@@ -60,6 +47,20 @@ class _HomePageState extends State<HomePage> with TrayListener {
 
   @override
   Widget build(BuildContext context) {
+    trayManager.setIcon(''); // TODO
+    Menu menu = Menu(
+      items: [
+        MenuItem(
+          key: 'show_window',
+          label: AppLocalizations.of(context)!.showWindow,
+          onClick: (menuItem) {
+            windowManager.show();
+          },
+        ),
+      ],
+    );
+    trayManager.setContextMenu(menu);
+
     return Scaffold(
       body: Row(
         children: <Widget>[
@@ -125,7 +126,7 @@ class _HomePageState extends State<HomePage> with TrayListener {
 
   @override
   void onTrayIconMouseDown() {
-    trayManager.popUpContextMenu();
+    windowManager.show();
   }
 
   @override
