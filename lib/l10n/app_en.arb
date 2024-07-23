@@ -18,5 +18,6 @@
     "notImplement": "Work in progress",
     "disconnect": "Disconnect",
     "use": "Use It",
-    "configNameComment": "Write a name for this config"
+    "configNameComment": "Write a name for this config",
+    "showWindow": "Show Window"
 }
