@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:winui_n2n/control_page.dart';
 import 'package:winui_n2n/about_page.dart';
 import 'package:winui_n2n/logger_page.dart';
 import 'package:winui_n2n/main.dart';
 import 'package:winui_n2n/setting_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tray_manager/tray_manager.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,8 +15,33 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TrayListener {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    trayManager.addListener(this);
+    trayManager.setIcon(''); // TODO
+    Menu menu = Menu(
+      items: [
+        MenuItem(
+          key: 'show_window',
+          label: 'Show Window',
+          onClick: (menuItem) {
+            windowManager.show();
+          },
+        ),
+      ],
+    );
+    trayManager.setContextMenu(menu);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    trayManager.removeListener(this);
+    super.dispose();
+  }
 
   Widget _homePageShow() {
     if (_selectedIndex == 0) {
@@ -94,5 +121,15 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  @override
+  void onTrayIconMouseDown() {
+    trayManager.popUpContextMenu();
+  }
+
+  @override
+  void onTrayIconRightMouseDown() {
+    trayManager.popUpContextMenu();
   }
 }
