@@ -19,5 +19,6 @@
     "disconnect": "Disconnect",
     "use": "Use It",
     "configNameComment": "Write a name for this config",
-    "showWindow": "Show Window"
+    "showWindow": "Show Window",
+    "chooseLanguage": "Choose Language"
 }
