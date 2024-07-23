@@ -19,5 +19,6 @@
     "disconnect": "断开连接",
     "use": "使用",
     "configNameComment": "给这个配置备注一个名字",
-    "showWindow": "显示主面板"
+    "showWindow": "显示主面板",
+    "chooseLanguage": "选择语言"
 }

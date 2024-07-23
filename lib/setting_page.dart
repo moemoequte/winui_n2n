@@ -31,22 +31,31 @@ class _SettingPageState extends State<SettingPage> {
             ),
           ],
         ),
-        DropdownButton<Locale>(
-          value: Localizations.localeOf(context),
-          items:
-              AppLocalizations.supportedLocales.map<DropdownMenuItem<Locale>>(
-            (e) {
-              return DropdownMenuItem(
-                value: e,
-                child: Text(e.toString()),
-              );
-            },
-          ).toList(),
-          onChanged: (value) {
-            setState(() {
-              MainApp.of(context).changeLocale(value!);
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(AppLocalizations.of(context)!.chooseLanguage),
+            const SizedBox(
+              width: 10,
+            ),
+            DropdownButton<Locale>(
+              value: Localizations.localeOf(context),
+              items: AppLocalizations.supportedLocales
+                  .map<DropdownMenuItem<Locale>>(
+                (e) {
+                  return DropdownMenuItem(
+                    value: e,
+                    child: Text(e.toString() == 'en' ? 'English' : '中文'),
+                  );
+                },
+              ).toList(),
+              onChanged: (value) {
+                setState(() {
+                  MainApp.of(context).changeLocale(value!);
+                });
+              },
+            ),
+          ],
         ),
         ElevatedButton(
           onPressed: () {
