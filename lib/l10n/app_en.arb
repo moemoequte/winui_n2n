@@ -23,5 +23,6 @@
     "chooseLanguage": "Choose Language",
     "successfullyConnected": "Connected",
     "macOrIpAlreadyInUse": "MAC or IP address already in use or not released yet by supernode",
-    "otherReasonFail": "Connect fail"
+    "otherReasonFail": "Connect fail",
+    "clearLog": "Clear log"
 }

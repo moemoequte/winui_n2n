@@ -17,4 +17,9 @@ class EdgeLogger with ChangeNotifier {
     logList.add(log);
     notifyListeners();
   }
+
+  void clearLog() {
+    logList.clear();
+    notifyListeners();
+  }
 }

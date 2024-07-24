@@ -23,5 +23,6 @@
     "chooseLanguage": "选择语言",
     "successfullyConnected": "已连接",
     "macOrIpAlreadyInUse": "MAC或IP地址已被占用或者未被中转服务器释放",
-    "otherReasonFail": "连接失败"
+    "otherReasonFail": "连接失败",
+    "clearLog": "清除日志"
 }
