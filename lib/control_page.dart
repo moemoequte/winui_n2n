@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:winui_n2n/edge_state.dart';
+import 'package:winui_n2n/globals.dart';
+import 'package:winui_n2n/navigation_service.dart';
 import 'package:winui_n2n/saved_connection.dart';
 import 'package:winui_n2n/shared_pref_singleton.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -276,22 +278,93 @@ class _ControlPageState extends State<ControlPage> {
                               '-r',
                             ],
                           ).then((process) async {
-                            EdgeState.instance.isRunning = true;
                             EdgeState.instance.process = process;
-                            EdgeState.instance.logger
-                                .addLog('edge.exe starting');
-                            debugPrint('edge.exe starting');
-                            setState(() {
-                              _edgeConnecting = false;
-                            });
+                            EdgeState.instance.logger.addLog('edge.exe start');
+
                             process.stdout
                                 .transform(const SystemEncoding().decoder)
                                 .listen((data) {
                               debugPrint('stdout: $data');
+
+                              if (data.contains('<<< ================ >>>')) {
+                                debugPrint('edge.exe connected');
+                                ScaffoldMessenger.of(context)
+                                  ..removeCurrentSnackBar()
+                                  ..showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                          AppLocalizations.of(context)!
+                                              .successfullyConnected),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+
+                                setState(() {
+                                  _edgeConnecting = false;
+                                  EdgeState.instance.isRunning = true;
+                                });
+                              } else if (data.contains(
+                                  'MAC or IP address already in use or not released yet by supernode')) {
+                                debugPrint(
+                                    'MAC or IP address already in use or not released yet by supernode');
+
+                                ScaffoldMessenger.of(context)
+                                  ..removeCurrentSnackBar()
+                                  ..showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                          AppLocalizations.of(context)!
+                                              .macOrIpAlreadyInUse),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+
+                                setState(() {
+                                  _edgeConnecting = false;
+                                  if (EdgeState.instance.process != null) {
+                                    if (EdgeState.instance.process!.kill()) {
+                                      EdgeState.instance.isRunning = false;
+                                    }
+                                  }
+                                });
+                              }
+                              // else if (data.contains(
+                              //     'username or password not recognized by supernode')) {
+                              //   debugPrint('Other reason fail');
+
+                              //   ScaffoldMessenger.of(context)
+                              //     ..removeCurrentSnackBar()
+                              //     ..showSnackBar(
+                              //       SnackBar(
+                              //         content: Text(
+                              //             AppLocalizations.of(context)!
+                              //                 .otherReasonFail),
+                              //         duration: const Duration(seconds: 2),
+                              //       ),
+                              //     );
+
+                              //   setState(() {
+                              //     _edgeConnecting = false;
+                              //     EdgeState.instance.isRunning = false;
+                              //   });
+                              // }
+
                               EdgeState.instance.logger.addLog(data);
                             });
 
                             await process.exitCode;
+                            if (_edgeConnecting) {
+                              debugPrint('Other reason fail');
+                              // TODO: Notify user.
+                              snackbarKey.currentState
+                                ?..removeCurrentSnackBar()
+                                ..showSnackBar(SnackBar(
+                                    content: Text(AppLocalizations.of(
+                                            NavigationService
+                                                .navigatorKey.currentContext!)!
+                                        .otherReasonFail)));
+                            }
+                            _edgeConnecting = false;
                             EdgeState.instance.isRunning = false;
                             EdgeState.instance.process = null;
                             EdgeState.instance.logger

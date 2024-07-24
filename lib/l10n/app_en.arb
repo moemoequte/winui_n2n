@@ -20,5 +20,8 @@
     "use": "Use It",
     "configNameComment": "Write a name for this config",
     "showWindow": "Show Window",
-    "chooseLanguage": "Choose Language"
+    "chooseLanguage": "Choose Language",
+    "successfullyConnected": "Connected",
+    "macOrIpAlreadyInUse": "MAC or IP address already in use or not released yet by supernode",
+    "otherReasonFail": "Connect fail"
 }

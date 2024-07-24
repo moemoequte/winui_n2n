@@ -20,5 +20,8 @@
     "use": "使用",
     "configNameComment": "给这个配置备注一个名字",
     "showWindow": "显示主面板",
-    "chooseLanguage": "选择语言"
+    "chooseLanguage": "选择语言",
+    "successfullyConnected": "已连接",
+    "macOrIpAlreadyInUse": "MAC或IP地址已被占用或者未被中转服务器释放",
+    "otherReasonFail": "连接失败"
 }

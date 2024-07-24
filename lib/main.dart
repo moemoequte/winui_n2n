@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:winui_n2n/application_exit_control.dart';
 import 'package:winui_n2n/edge_state.dart';
+import 'package:winui_n2n/globals.dart';
+import 'package:winui_n2n/navigation_service.dart';
 import 'package:winui_n2n/shared_pref_singleton.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -54,6 +56,8 @@ class _MainAppState extends State<MainApp> {
       darkTheme: ThemeData.dark(),
       themeMode: _themeMode,
       locale: _locale,
+      scaffoldMessengerKey: snackbarKey,
+      navigatorKey: NavigationService.navigatorKey,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const Scaffold(
