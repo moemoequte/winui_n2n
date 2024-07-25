@@ -24,5 +24,9 @@
     "successfullyConnected": "已连接",
     "macOrIpAlreadyInUse": "MAC或IP地址已被占用或者未被中转服务器释放",
     "otherReasonFail": "连接失败",
-    "clearLog": "清除日志"
+    "clearLog": "清除日志",
+    "exitAlert": "退出或者最小化程序?",
+    "alwaysMinimize": "总是最小化",
+    "minimize": "最小化",
+    "exit": "退出"
 }

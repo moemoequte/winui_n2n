@@ -19,4 +19,8 @@ class SharedPrefSingleton {
   Future<bool> setSavedConnection(String config) =>
       _pref.setString('saved_connection', config);
   String get savedConnection => _pref.getString('saved_connection') ?? '[]';
+
+  Future<bool> setMinimizeOrNot(bool min) =>
+      _pref.setBool('minimize_on_quit', min);
+  bool? get minimizeOnQuit => _pref.getBool('minimize_on_quit');
 }
