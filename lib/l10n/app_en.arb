@@ -24,5 +24,9 @@
     "successfullyConnected": "Connected",
     "macOrIpAlreadyInUse": "MAC or IP address already in use or not released yet by supernode",
     "otherReasonFail": "Connect fail",
-    "clearLog": "Clear log"
+    "clearLog": "Clear log",
+    "exitAlert": "Do you want to exit or minimize?",
+    "alwaysMinimize": "Always minimize",
+    "minimize": "Minimize",
+    "exit": "Exit"
 }
