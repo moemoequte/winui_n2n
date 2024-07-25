@@ -33,7 +33,7 @@ class _ApplicationExitControlState extends State<ApplicationExitControl> {
 
   Future<AppExitResponse> _handleExitRequest() async {
     if (SharedPrefSingleton().minimizeOnQuit == null) {
-      showDialog(
+      final exitApp = await showDialog<bool?>(
         context: context,
         builder: (context) {
           bool minimize = false;
@@ -71,14 +71,14 @@ class _ApplicationExitControlState extends State<ApplicationExitControl> {
                     children: [
                       TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context, false);
                           windowManager.hide();
                         },
                         child: Text(AppLocalizations.of(context)!.minimize),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context, true);
                         },
                         child: Text(AppLocalizations.of(context)!.exit),
                       ),
@@ -91,6 +91,13 @@ class _ApplicationExitControlState extends State<ApplicationExitControl> {
         },
       );
 
+      if (exitApp == null || exitApp == false) {
+        return AppExitResponse.cancel;
+      }
+    }
+
+    if (SharedPrefSingleton().minimizeOnQuit == false) {
+      windowManager.hide();
       return AppExitResponse.cancel;
     }
 
