@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> with TrayListener {
 
   @override
   Widget build(BuildContext context) {
-    trayManager.setIcon(''); // TODO
+    trayManager.setIcon('assets/app_icon.ico');
     Menu menu = Menu(
       items: [
         MenuItem(
