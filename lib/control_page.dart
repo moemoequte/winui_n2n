@@ -355,7 +355,6 @@ class _ControlPageState extends State<ControlPage> {
                             await process.exitCode;
                             if (_edgeConnecting) {
                               debugPrint('Other reason fail');
-                              // TODO: Notify user.
                               snackbarKey.currentState
                                 ?..removeCurrentSnackBar()
                                 ..showSnackBar(SnackBar(
