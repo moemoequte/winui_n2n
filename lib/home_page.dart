@@ -1,7 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:winui_n2n/control_page.dart';
 import 'package:winui_n2n/about_page.dart';
+import 'package:winui_n2n/globals.dart';
 import 'package:winui_n2n/logger_page.dart';
 import 'package:winui_n2n/main.dart';
 import 'package:winui_n2n/setting_page.dart';
@@ -57,6 +61,14 @@ class _HomePageState extends State<HomePage> with TrayListener {
             windowManager.show();
           },
         ),
+        MenuItem(
+          key: 'exit_app',
+          label: AppLocalizations.of(context)!.exit,
+          onClick: (menuItem) {
+            forceExit = true;
+            ServicesBinding.instance.exitApplication(AppExitType.required);
+          },
+        )
       ],
     );
     trayManager.setContextMenu(menu);
