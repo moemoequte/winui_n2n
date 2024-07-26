@@ -34,6 +34,22 @@ class _SettingPageState extends State<SettingPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(AppLocalizations.of(context)!.minimizeOnQuit),
+            Switch(
+              value: SharedPrefSingleton().minimizeOnQuit ?? false,
+              onChanged: (bool value) {
+                SharedPrefSingleton().setMinimizeOrNot(value).then(
+                  (_) {
+                    setState(() {});
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             Text(AppLocalizations.of(context)!.chooseLanguage),
             const SizedBox(
               width: 10,

@@ -28,5 +28,6 @@
     "exitAlert": "Do you want to exit or minimize?",
     "alwaysMinimize": "Always minimize",
     "minimize": "Minimize",
-    "exit": "Exit"
+    "exit": "Exit",
+    "minimizeOnQuit": "Minimize on quit"
 }
