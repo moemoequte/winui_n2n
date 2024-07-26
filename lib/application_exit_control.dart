@@ -96,7 +96,7 @@ class _ApplicationExitControlState extends State<ApplicationExitControl> {
       }
     }
 
-    if (SharedPrefSingleton().minimizeOnQuit == false) {
+    if (SharedPrefSingleton().minimizeOnQuit == true) {
       windowManager.hide();
       return AppExitResponse.cancel;
     }
