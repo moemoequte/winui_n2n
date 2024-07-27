@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> with TrayListener {
           label: AppLocalizations.of(context)!.exit,
           onClick: (menuItem) {
             forceExit = true;
-            ServicesBinding.instance.exitApplication(AppExitType.required);
+            ServicesBinding.instance.exitApplication(AppExitType.cancelable);
           },
         )
       ],
